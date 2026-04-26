@@ -1,5 +1,4 @@
 {
-  "version": 2,
   "builds": [
     {
       "src": "airline_reservation/wsgi.py",
