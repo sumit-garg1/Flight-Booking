@@ -141,8 +141,8 @@ PAYU_SECRET="174712f94169fd53ae7d130d11f5ddb7f0d89039619f882f00fb9f0fd0e2beaa"
 PAYU_MERCHANT_KEY="e3oACD"
 PAYU_MERCHANT_SALT="HBFdPADdiBv9ubyP3eUtoJFyn5zKrAHg"
 PAYU_URL="https://test.payu.in/_payment"
-PAYU_SUCCESS_URL = "http://127.0.0.1:8000/payment/payment-success/"
-PAYU_FAILURE_URL = "http://127.0.0.1:8000/payment/payment-failure/"
+PAYU_SUCCESS_URL = "https://flight-booking-jmwa.vercel.app//payment/payment-success/"
+PAYU_FAILURE_URL = "https://flight-booking-jmwa.vercel.app//payment/payment-failure/"
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'

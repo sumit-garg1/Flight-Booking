@@ -25,7 +25,7 @@ def send_account_email(
     booking_id=None,
     password=None,
     account_created=False,
-    domain="https://yourdomain.com",  # change in production
+    domain="https://flight-booking-jmwa.vercel.app/",  # change in production
 ):
 
     login_url = f"{domain}/login/"
