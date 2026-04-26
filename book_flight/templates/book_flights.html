@@ -1,0 +1,524 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50/30 py-12 px-4 sm:px-6 lg:px-8">
+
+<div class="max-w-7xl mx-auto text-center mb-12">
+    <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
+        Complete Your Booking
+    </h1>
+
+    <p class="text-gray-500">
+        Review your flight details and add extras
+    </p>
+</div>
+
+
+<div class="max-w-7xl mx-auto">
+
+
+<!-- FLIGHT SUMMARY -->
+<div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden mb-8">
+
+<div class="bg-gradient-to-r from-slate-800 to-slate-900 px-6 py-4">
+<h2 class="text-xl font-bold text-white">
+Flight Summary
+</h2>
+</div>
+
+<div class="p-6">
+
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+<div class="bg-gray-50 rounded-xl p-4">
+<p class="text-xs text-gray-500 uppercase">
+Offer ID
+</p>
+<p class="mt-1 text-lg font-bold">
+{{ offer_id }}
+</p>
+</div>
+
+
+<div class="bg-gray-50 rounded-xl p-4">
+<p class="text-xs text-gray-500 uppercase">
+Original Price
+</p>
+<p class="mt-1 font-semibold">
+{{ original_price }}
+</p>
+</div>
+
+
+<div class="bg-gray-50 rounded-xl p-4">
+<p class="text-xs text-gray-500 uppercase">
+Price in INR
+</p>
+<p class="mt-1 font-semibold">
+{{ price_inr }}
+</p>
+</div>
+
+
+<div class="bg-green-50 rounded-xl p-4 border border-green-200">
+<p class="text-xs text-green-700 uppercase">
+Final Price
+</p>
+
+<p class="mt-1 text-2xl font-bold text-green-600">
+₹<span id="final-price-inr">
+{{ final_price_inr }}
+</span>
+</p>
+</div>
+
+
+<div class="bg-gray-50 rounded-xl p-4">
+<p class="text-xs text-gray-500 uppercase">
+Fare Option
+</p>
+
+<p class="mt-1 font-semibold text-sky-600">
+{{ fare_option }}
+</p>
+</div>
+
+
+<div class="bg-gray-50 rounded-xl p-4">
+<p class="text-xs text-gray-500 uppercase">
+Trip Type
+</p>
+
+<p class="mt-1 font-semibold text-blue-600">
+One Way
+</p>
+</div>
+
+
+<div class="bg-gray-50 rounded-xl p-4">
+<p class="text-xs text-gray-500 uppercase">
+Airline
+</p>
+
+<p class="mt-1 font-semibold text-purple-600">
+{{ flight.validatingAirlineCodes|join:", "|default:"Multiple Airlines" }}
+</p>
+</div>
+
+
+<div class="bg-gray-50 rounded-xl p-4">
+<p class="text-xs text-gray-500 uppercase">
+Passengers
+</p>
+
+<p class="mt-1 text-2xl font-bold">
+1
+</p>
+</div>
+
+</div>
+
+</div>
+</div>
+
+
+
+<!-- TRAVELER PRICING -->
+<div class="mb-8">
+
+<h2 class="text-2xl font-bold mb-6 text-gray-900">
+Traveler Pricing & Extras
+</h2>
+
+
+<div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+
+<div class="bg-gradient-to-r from-gray-800 to-gray-900 px-6 py-4 flex justify-between">
+
+<div>
+<p class="text-sm text-gray-400">
+Traveler 1
+</p>
+
+<p class="text-xl font-bold text-white">
+Adult
+</p>
+</div>
+
+
+<div>
+<p class="text-sm text-gray-400">
+Total Price
+</p>
+
+<p class="text-2xl font-bold text-green-400">
+₹<span class="traveler-total">
+{{ final_price_inr }}
+</span>
+</p>
+
+</div>
+
+</div>
+
+
+
+<div class="p-6">
+
+<div class="bg-gray-50 rounded-xl p-5">
+
+<p class="text-sm font-semibold mb-4">
+Included Services
+</p>
+
+<div class="flex flex-wrap gap-2 mb-5">
+
+<span class="px-3 py-1 bg-green-50 rounded-lg text-xs">
+✓ Meal Included
+</span>
+
+<span class="px-3 py-1 bg-green-50 rounded-lg text-xs">
+✓ Cabin Baggage
+</span>
+
+<span class="px-3 py-1 bg-green-50 rounded-lg text-xs">
+✓ Seat Selection
+</span>
+
+</div>
+
+
+
+<p class="text-sm font-semibold mb-3">
+Add Extras
+</p>
+
+<div class="flex flex-wrap gap-3">
+
+<label class="flex items-center gap-2 px-3 py-2 bg-white rounded-lg border">
+<input
+type="checkbox"
+class="extra-checkbox"
+data-price="500">
+Meal +₹500
+</label>
+
+
+<label class="flex items-center gap-2 px-3 py-2 bg-white rounded-lg border">
+<input
+type="checkbox"
+class="extra-checkbox"
+data-price="300">
+Extra Baggage +₹300
+</label>
+
+
+<label class="flex items-center gap-2 px-3 py-2 bg-white rounded-lg border">
+<input
+type="checkbox"
+class="extra-checkbox"
+data-price="200">
+Priority Boarding +₹200
+</label>
+
+
+<label class="flex items-center gap-2 px-3 py-2 bg-white rounded-lg border">
+<input
+type="checkbox"
+class="extra-checkbox"
+data-price="150">
+Seat Selection +₹150
+</label>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<div class="flex flex-col sm:flex-row gap-4 justify-center pt-8 pb-12">
+
+<a href="{% url 'home' %}"
+class="px-8 py-3 bg-gray-100 rounded-xl font-semibold">
+Back To Search
+</a>
+
+
+<button onclick="openModal()"
+class="px-10 py-3 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-xl font-semibold">
+Continue To Payment
+</button>
+
+</div>
+
+</div>
+</div>
+
+
+
+<!-- MODAL - FIXED VERSION -->
+<div id="travelerModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden items-center justify-center z-50 transition-all duration-300">
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg transform scale-95 opacity-0 modal-content relative mx-4 overflow-hidden">
+        
+        <!-- Modal Header -->
+        <div class="bg-gradient-to-r from-green-600 to-emerald-600 px-6 py-4 flex items-center justify-between">
+            <div>
+                <h2 class="text-xl font-bold text-white">Traveler Details</h2>
+                <p class="text-xs text-green-100">Please provide passenger information</p>
+            </div>
+            <button onclick="closeModal()" class="text-white/80 hover:text-white transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Modal Body -->
+        <div class="p-6">
+            <form id="travelerForm" method="POST" action="{% url 'traveler_form' offer_id %}">
+                {% csrf_token %}
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1">First Name</label>
+                        <input name="first_name" 
+                               class="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 transition outline-none" 
+                               placeholder="Enter first name"
+                               required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1">Last Name</label>
+                        <input name="last_name" 
+                               class="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 transition outline-none"
+                               placeholder="Enter last name"
+                               required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1">Date of Birth</label>
+                        <input name="dob" type="date" 
+                               class="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 transition outline-none"
+                               required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1">Passport No</label>
+                        <input name="passport_no" 
+                               class="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 transition outline-none"
+                               placeholder="Enter passport number"
+                               required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1">Passport Expiry</label>
+                        <input id="passport_expiry" name="passport_expiry" type="date" 
+                               class="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 transition outline-none"
+                               required>
+                    </div>
+                    <div class="col-span-2">
+                        <label class="block text-sm font-semibold text-gray-700 mb-1">Email</label>
+                        <input name="email" type="email" 
+                               class="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 transition outline-none"
+                               placeholder="your@email.com"
+                               required>
+                    </div>
+                    <div class="col-span-2">
+                        <label class="block text-sm font-semibold text-gray-700 mb-1">Phone Number</label>
+                        <input name="phone" 
+                               class="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 transition outline-none"
+                               placeholder="+91 98765 43210"
+                               required>
+                    </div>
+                </div>
+
+                <!-- Important Note -->
+                <div class="mt-5 bg-amber-50 rounded-xl p-3 border border-amber-200">
+                    <p class="text-xs text-amber-700">Please ensure all details match your travel documents exactly as they appear on your passport.</p>
+                </div>
+
+                <!-- Modal Footer Buttons -->
+                <div class="mt-6 flex gap-3">
+                    <button type="button" onclick="closeModal()" 
+                            class="flex-1 px-4 py-2.5 border border-gray-300 text-gray-700 font-semibold rounded-xl hover:bg-gray-50 transition">
+                        Cancel
+                    </button>
+                    <button type="submit" 
+                            class="flex-1 px-4 py-2.5 bg-gradient-to-r from-green-600 to-emerald-600 text-white font-semibold rounded-xl hover:from-green-700 hover:to-emerald-700 transition shadow-md">
+                        Continue to Payment
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+function openModal(){
+    const modal = document.getElementById('travelerModal');
+    if(!modal) return;
+    
+    const box = modal.querySelector('.modal-content');
+    
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    
+    setTimeout(()=>{
+        if(box){
+            box.classList.remove('scale-95', 'opacity-0');
+            box.classList.add('scale-100', 'opacity-100');
+        }
+    },20);
+}
+
+function closeModal(){
+    const modal = document.getElementById('travelerModal');
+    if(!modal) return;
+    
+    const box = modal.querySelector('.modal-content');
+    
+    if(box){
+        box.classList.add('scale-95', 'opacity-0');
+        box.classList.remove('scale-100', 'opacity-100');
+    }
+    
+    setTimeout(()=>{
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+    },200);
+}
+
+function updatePrice(){
+    let base = parseFloat("{{ final_price_inr|escapejs }}");
+    let extra = 0;
+    
+    document.querySelectorAll('.extra-checkbox:checked').forEach(x=>{
+        extra += parseFloat(x.dataset.price||0);
+    });
+    
+    let total = (base + extra).toFixed(2);
+    
+    document.getElementById('final-price-inr').textContent = total;
+    
+    document.querySelectorAll('.traveler-total').forEach(e=>{
+        e.textContent = total;
+    });
+}
+
+// Initialize event listeners
+document.querySelectorAll('.extra-checkbox').forEach(cb=>{
+    cb.addEventListener('change', updatePrice);
+});
+
+// Close modal when clicking outside
+document.getElementById('travelerModal')?.addEventListener('click', function(e) {
+    if (e.target === this) {
+        closeModal();
+    }
+});
+
+// Passport expiry validation
+document.addEventListener("DOMContentLoaded", function() {
+    let today = new Date().toISOString().split("T")[0];
+    const passportExpiry = document.getElementById("passport_expiry");
+    if(passportExpiry) {
+        passportExpiry.setAttribute("min", today);
+    }
+    
+    const travelerForm = document.getElementById("travelerForm");
+    if(travelerForm) {
+        travelerForm.addEventListener("submit", function(e) {
+            const expiry = document.getElementById("passport_expiry").value;
+            if(expiry && expiry < today) {
+                e.preventDefault();
+                alert("❌ Passport expiry date cannot be in the past!");
+            }
+        });
+    }
+});
+</script>
+
+{% endblock %}
+
+
+
+
+{% comment %} {% extends "base.html" %}
+{% block content %}
+<div class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
+    
+    <!-- Page Header -->
+    <h1 class="text-2xl md:text-xl font-extrabold text-gray-700 mb-8 text-center sm:text-left">
+        Book Flight - Debug Mode
+    </h1>
+
+    <!-- Flight Summary -->
+    <div class="mt-4 bg-white shadow-lg rounded-2xl p-6 border border-gray-200 hover:shadow-xl transition-shadow duration-300">
+        <h2 class="text-xl font-bold mb-4 text-blue-700 border-b border-blue-100 pb-2">Flight Summary</h2>
+        <div class="space-y-1 text-gray-700 text-sm sm:text-base">
+            <p><strong>Offer ID:</strong> {{ offer_id }}</p>
+            <p><strong>Original Price:</strong> {{ original_price }}</p>
+            <p><strong>Price in INR:</strong> {{ price_inr }}</p>
+            <p><strong>Final Price After Discount:</strong> {{ final_price_inr }}</p>
+            <p><strong>Fare Option:</strong> {{ fare_option }}</p>
+            <p><strong>Fare Basis:</strong> {{ fare_basis }}</p>
+            <p><strong>Fare Types:</strong> {{ fare_types }}</p>
+        </div>
+    </div>
+
+    <!-- Itinerary -->
+    <div class="mt-6 bg-white shadow-lg rounded-2xl p-6 border border-gray-200 hover:shadow-xl transition-shadow duration-300">
+        <h2 class="text-xl font-bold mb-4 text-blue-700 border-b border-blue-100 pb-2">Itinerary</h2>
+        {% for itinerary in flight.itineraries %}
+            <div class="bg-blue-50 rounded-lg p-4 mb-4 border-l-4 border-blue-400 shadow-sm">
+                <p class="font-medium text-gray-800"><strong>Duration:</strong> {{ itinerary.duration }}</p>
+                <p class="font-medium text-gray-800"><strong>Total Stops:</strong> {{ itinerary.total_stops }}</p>
+                <h3 class="font-semibold mt-3 mb-2 text-gray-700">Segments:</h3>
+                {% for segment in itinerary.segments %}
+                    <div class="border p-3 mb-2 rounded-lg bg-white shadow-sm hover:shadow-md transition-shadow duration-200">
+                        <p class="text-gray-700"><span class="font-semibold">Flight:</span> {{ segment.carrierCode }} {{ segment.number }} ({{ segment.aircraft.code }})</p>
+                        <p class="text-gray-700"><span class="font-semibold">Departure:</span> {{ segment.departure.iataCode }} at {{ segment.departure.at }}</p>
+                        <p class="text-gray-700"><span class="font-semibold">Arrival:</span> {{ segment.arrival.iataCode }} at {{ segment.arrival.at }}</p>
+                        <p class="text-gray-700"><span class="font-semibold">Stops:</span> {{ segment.numberOfStops }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Traveler Pricing -->
+    <div class="mt-6 bg-white shadow-lg rounded-2xl p-6 border border-gray-200 hover:shadow-xl transition-shadow duration-300">
+        <h2 class="text-xl font-bold mb-4 text-blue-700 border-b border-blue-100 pb-2">Traveler Pricing</h2>
+        {% for traveler in flight.travelerPricings %}
+            <div class="border p-4 mb-4 rounded-xl bg-blue-50 shadow-sm hover:shadow-md transition-shadow duration-200">
+                <p class="text-gray-800"><strong>Traveler ID:</strong> {{ traveler.travelerId }}</p>
+                <p class="text-gray-800"><strong>Type:</strong> {{ traveler.travelerType }}</p>
+                <p class="text-gray-800"><strong>Fare Option:</strong> {{ traveler.fareOption }}</p>
+                <p class="text-gray-800"><strong>Price:</strong> {{ traveler.price.total }} {{ traveler.price.currency }}</p>
+                <h4 class="font-semibold mt-2 mb-1 text-gray-700">Fare Details by Segment:</h4>
+                {% for fd in traveler.fareDetailsBySegment %}
+                    <div class="bg-white rounded-lg p-2 mb-2 border shadow-sm hover:shadow-md transition-shadow duration-200">
+                        <p class="text-gray-700"><strong>Segment ID:</strong> {{ fd.segmentId }}</p>
+                        <p class="text-gray-700"><strong>Cabin:</strong> {{ fd.cabin }}</p>
+                        <p class="text-gray-700"><strong>Fare Basis:</strong> {{ fd.fareBasis }}</p>
+                        <p class="text-gray-700"><strong>Class:</strong> {{ fd.class }}</p>
+                        <p class="text-gray-700"><strong>Included Bags:</strong> Checked {{ fd.includedCheckedBags.quantity }}, Cabin {{ fd.includedCabinBags.quantity }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Back + Pay Now Buttons -->
+    <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center sm:justify-start">
+        <a href="{% url 'home' %}" class="inline-block bg-blue-600 text-white px-6 py-3 rounded-2xl font-medium shadow hover:bg-blue-700 transition-colors duration-200 text-center w-full sm:w-auto">
+             Back
+        </a>
+        <a href="/pay/{{ offer_id }}/" class="inline-block bg-green-600 text-white px-6 py-3 rounded-2xl font-medium shadow hover:bg-green-700 transition-colors duration-200 text-center w-full sm:w-auto">
+            Pay Now
+        </a>
+    </div>
+
+</div>
+{% endblock %} {% endcomment %}

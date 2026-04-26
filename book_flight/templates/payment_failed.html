@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment Failed</title>
+    <style>
+        body { font-family: Arial; text-align: center; padding: 100px; background: #0f2027; color: white; }
+        .failed { color: #e74c3c; font-size: 48px; }
+    </style>
+</head>
+<body>
+    <h1 class="failed">✕ Payment Failed</h1>
+    <p>{{ error|default:"Your payment could not be processed." }}</p>
+    <p>Please try again or contact support.</p>
+    <br>
+    <a href="/">Go to Home</a>
+</body>
+</html>

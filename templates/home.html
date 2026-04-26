@@ -1,0 +1,602 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+<!-- Main Content -->
+<div class="min-h-screen bg-gradient-to-br from-slate-50 via-white to-sky-50/30">
+  
+  <!-- Hero Section with Modern Design -->
+  <div class="relative overflow-hidden">
+    <!-- Abstract Background Shapes -->
+    <div class="absolute inset-0 overflow-hidden">
+      <div class="absolute -top-40 -right-40 w-80 h-80 bg-sky-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
+      <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-indigo-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30"></div>
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-blue-200 rounded-full filter blur-3xl opacity-20"></div>
+    </div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16">
+      <!-- Main Heading -->
+      <div class="text-center mb-10 animate-fade-in-up">
+        <div class="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm rounded-full px-4 py-1.5 shadow-sm mb-6 border border-gray-100">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-sky-500"></span>
+          </span>
+          <span class="text-xs font-medium text-gray-600">Live Flight Prices • 1M+ Happy Travelers</span>
+        </div>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900 mb-4">
+          Where will your wings
+          <span class="relative inline-block">
+            take you today?
+            <svg class="absolute -bottom-2 left-0 w-full h-3 text-sky-400" viewBox="0 0 200 10" fill="currentColor">
+              <path d="M0 5 Q 25 0, 50 5 T 100 5 T 150 5 T 200 5" stroke="none" fill="none"/>
+              <path d="M0 5 Q 25 10, 50 5 T 100 5 T 150 5 T 200 5" stroke="none" fill="none"/>
+            </svg>
+          </span>
+        </h1>
+        <p class="text-lg text-gray-500 max-w-2xl mx-auto">
+          Compare 600+ airlines to find the perfect flight at the best price. Instant booking, secure payment.
+        </p>
+      </div>
+
+      <!-- Modern Search Container -->
+      <div class="bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/50 overflow-hidden transition-all duration-300 hover:shadow-3xl">
+        <!-- Trip Type Tabs - Modern Minimal -->
+        <div class="flex border-b border-gray-100 bg-gray-50/50 px-6">
+          <button class="px-6 py-4 text-sm font-semibold transition-all relative group">
+            <div class="flex items-center gap-2 text-sky-600">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+              </svg>
+              One Way
+            </div>
+            <div class="absolute bottom-0 left-0 w-full h-0.5 bg-sky-600 scale-x-100 transition-transform"></div>
+          </button>
+          <button class="px-6 py-4 text-sm font-semibold text-gray-500 hover:text-gray-700 transition-all group">
+            <div class="flex items-center gap-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
+              </svg>
+              Round Trip
+            </div>
+          </button>
+          <button class="px-6 py-4 text-sm font-semibold text-gray-500 hover:text-gray-700 transition-all group">
+            <div class="flex items-center gap-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+              </svg>
+              Multi-City
+            </div>
+          </button>
+        </div>
+
+        <!-- Search Form - Optimized for Flight Booking -->
+        <form action="{% url 'airport_routes' %}" method="get" class="p-6 md:p-8">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+            <!-- From Airport -->
+            <div class="relative">
+              <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
+                Departure
+              </label>
+              <div class="relative group">
+                <div class="absolute left-4 top-1/2 -translate-y-1/2">
+                  <div class="w-8 h-8 bg-sky-100 rounded-xl flex items-center justify-center">
+                    <svg class="w-4 h-4 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4"/>
+                    </svg>
+                  </div>
+                </div>
+                <input
+                  id="from_airport"
+                  name="from_airport"
+                  type="text"
+                  placeholder="From where?"
+                  class="w-full pl-16 pr-4 py-3.5 text-base font-medium text-gray-900 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-sky-500 focus:border-sky-500 focus:bg-white transition-all duration-200"
+                  autocomplete="off"
+                  value="{{ from_airport|default_if_none:'' }}"
+                />
+                <ul id="fromResults" class="absolute z-50 w-full mt-2 bg-white border border-gray-100 rounded-2xl shadow-xl max-h-80 overflow-auto hidden"></ul>
+              </div>
+              <p class="mt-2 text-xs text-gray-400 flex items-center gap-1">
+                <span>Popular: DEL, BOM, BLR</span>
+              </p>
+            </div>
+
+            <!-- To Airport -->
+            <div class="relative">
+              <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
+                Arrival
+              </label>
+              <div class="relative group">
+                <div class="absolute left-4 top-1/2 -translate-y-1/2">
+                  <div class="w-8 h-8 bg-indigo-100 rounded-xl flex items-center justify-center">
+                    <svg class="w-4 h-4 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7l4-4m0 0l4 4m-4-4v18"/>
+                    </svg>
+                  </div>
+                </div>
+                <input
+                  id="to_airport"
+                  name="to_airport"
+                  type="text"
+                  placeholder="Going to?"
+                  class="w-full pl-16 pr-4 py-3.5 text-base font-medium text-gray-900 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-sky-500 focus:border-sky-500 focus:bg-white transition-all duration-200"
+                  autocomplete="off"
+                  value="{{ to_airport|default_if_none:'' }}"
+                />
+                <ul id="toResults" class="absolute z-50 w-full mt-2 bg-white border border-gray-100 rounded-2xl shadow-xl max-h-80 overflow-auto hidden"></ul>
+              </div>
+            </div>
+
+            <!-- Date Selection with Modern Look -->
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
+                  Departure
+                </label>
+                <div class="relative">
+                  <div class="absolute left-4 top-1/2 -translate-y-1/2">
+                    <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                  </div>
+                  <input
+                    type="date"
+                    class="w-full pl-12 pr-4 py-3.5 text-base font-medium text-gray-900 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-sky-500 focus:border-sky-500 cursor-pointer"
+                  />
+                </div>
+              </div>
+              
+              <div>
+                <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
+                  Return
+                </label>
+                <div class="relative">
+                  <div class="absolute left-4 top-1/2 -translate-y-1/2">
+                    <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                  </div>
+                  <input
+                    type="date"
+                    class="w-full pl-12 pr-4 py-3.5 text-base font-medium text-gray-500 bg-gray-50 border border-dashed border-gray-300 rounded-2xl cursor-pointer"
+                  />
+                  <div class="absolute right-3 top-1/2 -translate-y-1/2">
+                    <span class="text-xs font-bold text-sky-600 bg-sky-50 px-2 py-1 rounded-full">+ Save 15%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Travelers & Class - Enhanced -->
+            <div>
+              <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
+                Passengers & Cabin
+              </label>
+              <div class="relative">
+                <div class="absolute left-4 top-1/2 -translate-y-1/2">
+                  <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5 1.197h-6"/>
+                  </svg>
+                </div>
+                <select class="w-full pl-12 pr-4 py-3.5 text-base font-medium text-gray-900 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-sky-500 appearance-none cursor-pointer">
+                  <option>1 Adult • Economy</option>
+                  <option>2 Adults • Economy</option>
+                  <option>2 Adults • Premium Economy</option>
+                  <option>2 Adults • Business</option>
+                  <option>2 Adults, 1 Child • Economy</option>
+                  <option>2 Adults, 2 Children • Economy</option>
+                </select>
+                <div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+                  <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Fare Type Options - Simplified -->
+          <div class="flex flex-wrap gap-3 mb-8">
+            <button class="px-5 py-2 bg-sky-50 text-sky-700 rounded-full text-sm font-medium hover:bg-sky-100 transition-colors">
+              ✈️ Standard Fare
+            </button>
+            <button class="px-5 py-2 bg-gray-100 text-gray-600 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors">
+              🎓 Student Fare
+            </button>
+            <button class="px-5 py-2 bg-gray-100 text-gray-600 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors">
+              👨‍💼 Corporate Fare
+            </button>
+            <button class="px-5 py-2 bg-gray-100 text-gray-600 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors">
+              👵 Senior Citizen
+            </button>
+          </div>
+
+          <!-- Search Button - Modern Call to Action -->
+          <div class="flex justify-center">
+            <button
+              type="submit"
+              class="group relative px-12 py-4 bg-gradient-to-r from-sky-600 to-blue-700 text-white text-base font-bold rounded-2xl hover:from-sky-700 hover:to-blue-800 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300 w-full md:w-auto md:min-w-[280px]"
+            >
+              <div class="flex items-center justify-center gap-3">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                </svg>
+                Search Flights
+                <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                </svg>
+              </div>
+              <div class="absolute -right-1 -top-1 w-6 h-6 bg-amber-400 rounded-full flex items-center justify-center text-xs font-bold text-gray-900 animate-bounce shadow-lg">
+                ✨
+              </div>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Exclusive Flight Offers -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <h2 class="text-2xl md:text-3xl font-bold text-gray-900">Exclusive Flight Deals</h2>
+        <p class="text-gray-500 mt-1">Handpicked offers just for you</p>
+      </div>
+      <a href="#" class="text-sky-600 font-semibold hover:text-sky-700 flex items-center gap-1 text-sm">
+        View all
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+      <!-- Offer 1 -->
+      <div class="group relative bg-gradient-to-br from-sky-500 to-blue-700 rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+        <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16"></div>
+        <div class="p-6 relative z-10">
+          <div class="flex items-center justify-between mb-4">
+            <span class="px-3 py-1 bg-white/20 text-white text-xs font-bold rounded-full backdrop-blur-sm">FIRST TIME</span>
+            <div class="text-white/70 text-xs font-medium">FLASH SALE</div>
+          </div>
+          <h3 class="text-2xl font-bold text-white mb-2">₹999*</h3>
+          <p class="text-sky-100 text-sm mb-4">Domestic flights starting at just ₹999</p>
+          <div class="flex items-center justify-between">
+            <div>
+              <div class="text-white/80 text-xs mb-1">Use code:</div>
+              <div class="text-white font-mono font-bold tracking-wider">FLY999</div>
+            </div>
+            <button class="px-5 py-2 bg-white text-sky-700 font-bold rounded-xl text-sm hover:bg-gray-100 transition-colors shadow-md">
+              Book Now →
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Offer 2 -->
+      <div class="group relative bg-gradient-to-br from-amber-500 to-orange-600 rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+        <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16"></div>
+        <div class="p-6 relative z-10">
+          <div class="flex items-center justify-between mb-4">
+            <span class="px-3 py-1 bg-white/20 text-white text-xs font-bold rounded-full backdrop-blur-sm">BANK OFFER</span>
+            <div class="text-white/70 text-xs font-medium">UP TO ₹2,500 OFF</div>
+          </div>
+          <h3 class="text-2xl font-bold text-white mb-2">12% OFF*</h3>
+          <p class="text-amber-100 text-sm mb-4">On international flights with HDFC Bank</p>
+          <div class="flex items-center justify-between">
+            <div>
+              <div class="text-white/80 text-xs mb-1">Use code:</div>
+              <div class="text-white font-mono font-bold tracking-wider">HDFCFLY</div>
+            </div>
+            <button class="px-5 py-2 bg-white text-amber-700 font-bold rounded-xl text-sm hover:bg-gray-100 transition-colors shadow-md">
+              Grab Deal →
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Offer 3 -->
+      <div class="group relative bg-gradient-to-br from-emerald-500 to-teal-700 rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+        <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16"></div>
+        <div class="p-6 relative z-10">
+          <div class="flex items-center justify-between mb-4">
+            <span class="px-3 py-1 bg-white/20 text-white text-xs font-bold rounded-full backdrop-blur-sm">STUDENT</span>
+            <div class="text-white/70 text-xs font-medium">EXTRA BAGGAGE</div>
+          </div>
+          <h3 class="text-2xl font-bold text-white mb-2">UPTO 20% OFF</h3>
+          <p class="text-emerald-100 text-sm mb-4">+ 15kg extra baggage allowance</p>
+          <div class="flex items-center justify-between">
+            <div>
+              <div class="text-white/80 text-xs mb-1">Use code:</div>
+              <div class="text-white font-mono font-bold tracking-wider">STUDENT20</div>
+            </div>
+            <button class="px-5 py-2 bg-white text-emerald-700 font-bold rounded-xl text-sm hover:bg-gray-100 transition-colors shadow-md">
+              Book Now →
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Why Choose Us -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 py-8 border-t border-gray-100">
+      <div class="flex items-center gap-4 p-4 rounded-xl hover:bg-white transition-colors">
+        <div class="w-12 h-12 bg-sky-100 rounded-2xl flex items-center justify-center">
+          <svg class="w-6 h-6 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+          </svg>
+        </div>
+        <div>
+          <h4 class="font-bold text-gray-900">Secure Booking</h4>
+          <p class="text-sm text-gray-500">PCI-DSS compliant</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-4 p-4 rounded-xl hover:bg-white transition-colors">
+        <div class="w-12 h-12 bg-emerald-100 rounded-2xl flex items-center justify-center">
+          <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+        <div>
+          <h4 class="font-bold text-gray-900">Best Price Guarantee</h4>
+          <p class="text-sm text-gray-500">We match any price</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-4 p-4 rounded-xl hover:bg-white transition-colors">
+        <div class="w-12 h-12 bg-purple-100 rounded-2xl flex items-center justify-center">
+          <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+          </svg>
+        </div>
+        <div>
+          <h4 class="font-bold text-gray-900">24/7 Support</h4>
+          <p class="text-sm text-gray-500">Dedicated travel experts</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-4 p-4 rounded-xl hover:bg-white transition-colors">
+        <div class="w-12 h-12 bg-amber-100 rounded-2xl flex items-center justify-center">
+          <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+          </svg>
+        </div>
+        <div>
+          <h4 class="font-bold text-gray-900">Instant Refunds</h4>
+          <p class="text-sm text-gray-500">Fast cancellation process</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Flight Results Section -->
+  {% if flight_offers %}
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+      <div class="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
+        <div class="px-8 py-6 bg-gradient-to-r from-gray-50 to-white border-b border-gray-100">
+          <div class="flex flex-wrap items-center justify-between gap-4">
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 bg-emerald-100 rounded-2xl flex items-center justify-center">
+                <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+              </div>
+              <div>
+                <h2 class="text-xl font-bold text-gray-900">{{ flight_offers|length }} Flights Found</h2>
+                <p class="text-sm text-gray-500">Best fares from top airlines</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded-xl text-sm font-medium hover:bg-gray-200 transition-colors flex items-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12"/>
+                </svg>
+                Sort: Price
+              </button>
+              <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded-xl text-sm font-medium hover:bg-gray-200 transition-colors flex items-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/>
+                </svg>
+                Filter
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-6 md:p-8">
+          <div class="space-y-5">
+            {% for offer in flight_offers %}
+              <div class="group bg-white border border-gray-100 rounded-2xl hover:border-sky-200 hover:shadow-lg transition-all duration-300">
+                <div class="p-6">
+                  <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                    <!-- Airline -->
+                    <div class="flex items-center gap-4 min-w-[180px]">
+                      <div class="w-14 h-14 bg-gradient-to-br from-sky-100 to-blue-100 rounded-xl flex items-center justify-center shadow-sm">
+                        <svg class="w-7 h-7 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 19l9 2-9-18-9 18 9-2z"/>
+                        </svg>
+                      </div>
+                      <div>
+                        <h3 class="font-bold text-gray-900 text-lg">{{ offer.route|default:"Flight Route" }}</h3>
+                        <p class="text-xs text-gray-500 font-mono">{{ offer.flight_numbers|default:"AI 101" }}</p>
+                      </div>
+                    </div>
+
+                    <!-- Flight Times -->
+                    <div class="flex-1 flex items-center justify-between px-4">
+                      <div class="text-center">
+                        <div class="text-xl font-bold text-gray-900">{{ offer.departure|slice:":3"|default:"09:30" }}</div>
+                        <div class="text-xs text-gray-500">Departure</div>
+                      </div>
+                      <div class="flex-1 px-6">
+                        <div class="relative flex items-center justify-center">
+                          <div class="w-full h-px bg-gray-200"></div>
+                          <div class="absolute bg-white px-3">
+                            <svg class="w-5 h-5 text-sky-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                            </svg>
+                          </div>
+                        </div>
+                        <div class="text-center text-xs text-gray-400 mt-1">{{ offer.duration|default:"2h 30m" }}</div>
+                        <div class="text-center text-[11px] text-gray-400">Non-stop</div>
+                      </div>
+                      <div class="text-center">
+                        <div class="text-xl font-bold text-gray-900">{{ offer.arrival|slice:":3"|default:"12:00" }}</div>
+                        <div class="text-xs text-gray-500">Arrival</div>
+                      </div>
+                    </div>
+
+                    <!-- Price & Action -->
+                    <div class="text-right min-w-[160px]">
+                      <div class="text-2xl font-bold text-gray-900">{{ offer.price|default:"₹4,599" }}</div>
+                      <div class="text-xs text-gray-400 mb-2">per adult</div>
+                      <button class="px-6 py-2.5 bg-gradient-to-r from-sky-600 to-blue-600 text-white font-semibold rounded-xl hover:from-sky-700 hover:to-blue-700 transition-all shadow-md group-hover:shadow-lg text-sm">
+                        Select
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Flight Details Footer -->
+                  <div class="mt-5 pt-4 border-t border-gray-50 flex flex-wrap items-center justify-between gap-3">
+                    <div class="flex items-center gap-4 text-xs text-gray-500">
+                      <span class="flex items-center gap-1">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        {{ offer.duration|default:"2h 30m" }}
+                      </span>
+                      <span class="flex items-center gap-1">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
+                        </svg>
+                        {{ offer.stops|default:"0" }} stop
+                      </span>
+                      <span class="flex items-center gap-1 text-emerald-600">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        Free cancellation available
+                      </span>
+                    </div>
+                    <div class="text-xs text-sky-600 font-medium">
+                      View Details →
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+</div>
+
+<!-- Autocomplete JavaScript -->
+<script>
+const airportDict = {{ airport_dict|safe }};
+
+function setupAutocomplete(inputId, resultsId) {
+    const input = document.getElementById(inputId);
+    const resultsBox = document.getElementById(resultsId);
+
+    if (!input || !resultsBox) return;
+
+    input.addEventListener("input", () => {
+        const query = input.value.toLowerCase().trim();
+        resultsBox.innerHTML = "";
+        
+        if (!query || query.length < 2) {
+            resultsBox.classList.add("hidden");
+            return;
+        }
+
+        const matches = Object.keys(airportDict).filter(key => 
+            key.toLowerCase().includes(query) || 
+            airportDict[key].toLowerCase().includes(query)
+        ).slice(0, 8);
+
+        if (matches.length > 0) {
+            matches.forEach(key => {
+                const li = document.createElement("li");
+                li.className = "border-b border-gray-50 last:border-0";
+                li.innerHTML = `
+                    <div class="flex items-center justify-between p-3 hover:bg-sky-50 cursor-pointer transition-colors">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-sky-100 rounded-xl flex items-center justify-center">
+                                <svg class="w-5 h-5 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-gray-900">${airportDict[key]}</div>
+                                <div class="text-xs text-gray-400">${key} Airport</div>
+                            </div>
+                        </div>
+                        <span class="px-2 py-1 bg-gray-100 text-gray-600 text-xs font-mono rounded-lg">${key}</span>
+                    </div>
+                `;
+                
+                li.addEventListener("click", () => {
+                    input.value = airportDict[key];
+                    resultsBox.classList.add("hidden");
+                    if (inputId === 'from_airport') {
+                        document.getElementById('to_airport')?.focus();
+                    }
+                });
+                
+                resultsBox.appendChild(li);
+            });
+            
+            resultsBox.classList.remove("hidden");
+        } else {
+            resultsBox.classList.add("hidden");
+        }
+    });
+
+    document.addEventListener("click", (e) => {
+        if (!input.contains(e.target) && !resultsBox.contains(e.target)) {
+            resultsBox.classList.add("hidden");
+        }
+    });
+    
+    input.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+            resultsBox.classList.add("hidden");
+        }
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    setupAutocomplete("from_airport", "fromResults");
+    setupAutocomplete("to_airport", "toResults");
+});
+</script>
+
+<!-- Additional Animation Styles -->
+<style>
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+  }
+  .animate-bounce {
+    animation: bounce 1s infinite;
+  }
+</style>
+
+{% endblock %}

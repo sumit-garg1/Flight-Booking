@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Booking Details | Flight Booking System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="bg-gray-50 min-h-screen p-6">
+    <div class="max-w-4xl mx-auto">
+        <div class="mb-6">
+            <a href="{% url 'my_bookings' %}" class="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900">
+                <i class="fas fa-arrow-left"></i>
+                Back to My Bookings
+            </a>
+        </div>
+        
+        <div class="bg-white rounded-lg border border-gray-200 overflow-hidden">
+            <!-- Header -->
+            <div class="bg-gray-50 px-6 py-4 border-b border-gray-200">
+                <h1 class="text-2xl font-bold text-gray-900">Booking Details</h1>
+                <p class="text-gray-500 text-sm mt-1">PNR: {{ booking.pnr }}</p>
+            </div>
+            
+            <div class="p-6 space-y-6">
+                <!-- Status -->
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-600">Status:</span>
+                    <span class="px-3 py-1 rounded-full text-sm font-semibold 
+                        {% if booking.booking_status == 'BOOKED' %}
+                            bg-green-100 text-green-700
+                        {% elif booking.booking_status == 'PENDING' %}
+                            bg-yellow-100 text-yellow-700
+                        {% else %}
+                            bg-red-100 text-red-700
+                        {% endif %}
+                    ">
+                        {{ booking.booking_status }}
+                    </span>
+                </div>
+                
+                <!-- Passenger Details -->
+                <div class="border-t pt-4">
+                    <h2 class="font-semibold text-gray-900 mb-3">Passenger Details</h2>
+                    <div class="grid grid-cols-2 gap-4 text-sm">
+                        <div>
+                            <span class="text-gray-500">Name:</span>
+                            <p class="font-medium">{{ booking.traveler.first_name }} {{ booking.traveler.last_name }}</p>
+                        </div>
+                        <div>
+                            <span class="text-gray-500">Email:</span>
+                            <p class="font-medium">{{ booking.traveler.email }}</p>
+                        </div>
+                        <div>
+                            <span class="text-gray-500">Phone:</span>
+                            <p class="font-medium">{{ booking.traveler.phone }}</p>
+                        </div>
+                        <div>
+                            <span class="text-gray-500">Passport:</span>
+                            <p class="font-medium">{{ booking.traveler.passport_no }}</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Flight Details -->
+                <div class="border-t pt-4">
+                    <h2 class="font-semibold text-gray-900 mb-3">Flight Details</h2>
+                    {% if flight_details.itineraries %}
+                        {% for itinerary in flight_details.itineraries %}
+                            {% for segment in itinerary.segments %}
+                            <div class="bg-gray-50 rounded-lg p-4 mb-3">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="font-bold">{{ segment.carrierCode }} {{ segment.number }}</span>
+                                    <span class="text-sm text-gray-500">{{ segment.duration }}</span>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4 text-sm">
+                                    <div>
+                                        <span class="text-gray-500">Departure:</span>
+                                        <p class="font-medium">{{ segment.departure.iataCode }}</p>
+                                        <p class="text-xs text-gray-400">{{ segment.departure.at }}</p>
+                                    </div>
+                                    <div>
+                                        <span class="text-gray-500">Arrival:</span>
+                                        <p class="font-medium">{{ segment.arrival.iataCode }}</p>
+                                        <p class="text-xs text-gray-400">{{ segment.arrival.at }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        {% endfor %}
+                    {% else %}
+                        <p class="text-gray-500">Flight details not available</p>
+                    {% endif %}
+                </div>
+                
+                <!-- Price Details -->
+                <div class="border-t pt-4">
+                    <h2 class="font-semibold text-gray-900 mb-3">Price Details</h2>
+                    <div class="space-y-2">
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">Base Fare:</span>
+                            <span>₹{% widthratio booking.final_price_inr|default:0 1 1 %}</span>
+                        </div>
+                        {% if booking.selected_extras %}
+                            <div class="flex justify-between">
+                                <span class="text-gray-500">Extras:</span>
+                                <span>+₹{{ booking.extras_amount_inr|default:0 }}</span>
+                            </div>
+                        {% endif %}
+                        <div class="flex justify-between font-bold pt-2 border-t">
+                            <span>Total Paid:</span>
+                            <span class="text-green-600">₹{{ booking.final_price_inr }}</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Action Buttons -->
+                <div class="flex gap-3 pt-4 border-t">
+                    <a href="{% url 'download_ticket' booking.pnr %}" 
+                       class="flex-1 text-center bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                        <i class="fas fa-download"></i> Download Ticket
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

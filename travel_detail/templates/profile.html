@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile | Flight Booking System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    
+    <div class="min-h-screen">
+        
+        <!-- Top Navigation Bar -->
+        <nav class="bg-white border-b border-gray-200 sticky top-0 z-10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-16">
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-plane text-blue-600 text-xl"></i>
+                        <span class="font-bold text-gray-900">FlightBooking</span>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <a href="/" class="text-gray-600 hover:text-gray-900 transition">
+                            <i class="fas fa-home"></i> Home
+                        </a>
+                        <a href="{% url 'my_bookings' %}" class="text-gray-600 hover:text-gray-900 transition">
+                            <i class="fas fa-ticket-alt"></i> My Bookings
+                        </a>
+                        <a href="{% url 'logout' %}" class="text-red-600 hover:text-red-700 transition">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            
+            <!-- Profile Header -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden mb-8">
+                <div class="bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-8">
+                    <div class="flex items-center gap-4">
+                        <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-lg">
+                            <i class="fas fa-user text-3xl text-blue-600"></i>
+                        </div>
+                        <div>
+                            <h1 class="text-2xl font-bold text-white">{{ user.first_name }} {{ user.last_name }}</h1>
+                            <p class="text-blue-100">{{ user.username }}</p>
+                            <p class="text-blue-100 text-sm mt-1">
+                                <i class="fas fa-calendar-alt mr-1"></i> 
+                                Member since {{ user.date_joined|date:"F Y" }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Profile Stats -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-gray-200">
+                    <div class="px-6 py-4 text-center">
+                        <p class="text-2xl font-bold text-gray-900">{{ bookings|length }}</p>
+                        <p class="text-sm text-gray-500">Total Bookings</p>
+                    </div>
+                    <div class="px-6 py-4 text-center">
+                        <p class="text-2xl font-bold text-gray-900">
+                            {% with active=0 %}
+                                {% for booking in bookings %}
+                                    {% if booking.booking_status == 'BOOKED' %}
+                                        {{ forloop.counter }}
+                                    {% endif %}
+                                {% endfor %}
+                            {% endwith %}
+                        </p>
+                        <p class="text-sm text-gray-500">Active Bookings</p>
+                    </div>
+                    <div class="px-6 py-4 text-center">
+                        <p class="text-2xl font-bold text-gray-900">
+                            ₹{{ total_spent|default:"0" }}
+                        </p>
+                        <p class="text-sm text-gray-500">Total Spent</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile Information Section -->
+            <div class="grid lg:grid-cols-3 gap-8 mb-8">
+                <!-- Personal Details Card -->
+                <div class="lg:col-span-1">
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200">
+                        <div class="px-6 py-4 border-b border-gray-200">
+                            <h2 class="font-semibold text-gray-900">
+                                <i class="fas fa-user-circle text-blue-600 mr-2"></i>
+                                Personal Information
+                            </h2>
+                        </div>
+                        <div class="p-6 space-y-4">
+                            <div>
+                                <p class="text-xs text-gray-500 uppercase">Full Name</p>
+                                <p class="text-gray-900 font-medium">{{ user.first_name }} {{ user.last_name }}</p>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500 uppercase">Email Address</p>
+                                <p class="text-gray-900 font-medium">{{ user.username }}</p>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500 uppercase">Last Login</p>
+                                <p class="text-gray-900 font-medium">{{ user.last_login|date:"d M Y, h:i A"|default:"Never" }}</p>
+                            </div>
+                            <button class="w-full mt-4 px-4 py-2 border border-gray-300 rounded-lg text-sm text-gray-700 hover:bg-gray-50 transition">
+                                <i class="fas fa-edit mr-2"></i> Edit Profile
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Bookings Card -->
+                <div class="lg:col-span-2">
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200">
+                        <div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
+                            <h2 class="font-semibold text-gray-900">
+                                <i class="fas fa-clock text-blue-600 mr-2"></i>
+                                Recent Bookings
+                            </h2>
+                            <a href="{% url 'my_bookings' %}" class="text-sm text-blue-600 hover:text-blue-700">
+                                View All <i class="fas fa-arrow-right ml-1"></i>
+                            </a>
+                        </div>
+                        
+                        <div class="divide-y divide-gray-200">
+                            {% if bookings %}
+                                {% for booking in bookings|slice:":3" %}
+                                <div class="p-6 hover:bg-gray-50 transition">
+                                    <div class="flex justify-between items-start mb-3">
+                                        <div>
+                                            <span class="font-mono text-sm font-semibold text-gray-900">{{ booking.pnr }}</span>
+                                            <span class="ml-3 text-xs px-2 py-1 rounded-full 
+                                                {% if booking.booking_status == 'BOOKED' %}
+                                                    bg-green-100 text-green-700
+                                                {% elif booking.booking_status == 'PENDING' %}
+                                                    bg-yellow-100 text-yellow-700
+                                                {% else %}
+                                                    bg-red-100 text-red-700
+                                                {% endif %}
+                                            ">
+                                                {{ booking.booking_status }}
+                                            </span>
+                                        </div>
+                                        <span class="text-sm text-gray-500">{{ booking.created_at|date:"d M Y" }}</span>
+                                    </div>
+                                    
+                                    {% if booking.flight_offer and booking.flight_offer.offer_json.itineraries %}
+                                        {% with itinerary=booking.flight_offer.offer_json.itineraries.0 %}
+                                            <div class="flex items-center gap-3 text-sm mb-3">
+                                                <div class="flex items-center gap-2">
+                                                    <i class="fas fa-plane-departure text-gray-400"></i>
+                                                    {% with first_segment=itinerary.segments.0 %}
+                                                        <span class="font-medium">{{ first_segment.departure.iataCode }}</span>
+                                                    {% endwith %}
+                                                </div>
+                                                <i class="fas fa-arrow-right text-gray-400 text-xs"></i>
+                                                <div class="flex items-center gap-2">
+                                                    <i class="fas fa-plane-arrival text-gray-400"></i>
+                                                    {% with last_segment=itinerary.segments|last %}
+                                                        <span class="font-medium">{{ last_segment.arrival.iataCode }}</span>
+                                                    {% endwith %}
+                                                </div>
+                                            </div>
+                                        {% endwith %}
+                                    {% endif %}
+                                    
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-lg font-bold text-gray-900">₹{{ booking.final_price_inr }}</span>
+                                        <a href="{% url 'booking_detail' booking.pnr %}" class="text-sm text-blue-600 hover:text-blue-700">
+                                            View Details <i class="fas fa-chevron-right ml-1 text-xs"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            {% else %}
+                                <div class="p-12 text-center">
+                                    <i class="fas fa-inbox text-4xl text-gray-300 mb-3"></i>
+                                    <p class="text-gray-500">No bookings yet</p>
+                                    <a href="/" class="inline-block mt-3 text-blue-600 hover:text-blue-700 text-sm">
+                                        Book your first flight <i class="fas fa-arrow-right ml-1"></i>
+                                    </a>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions Card -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200">
+                <div class="px-6 py-4 border-b border-gray-200">
+                    <h2 class="font-semibold text-gray-900">
+                        <i class="fas fa-bolt text-blue-600 mr-2"></i>
+                        Quick Actions
+                    </h2>
+                </div>
+                <div class="p-6 grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <a href="/" class="flex flex-col items-center p-4 rounded-lg border border-gray-200 hover:border-blue-300 hover:shadow-md transition">
+                        <i class="fas fa-search text-2xl text-blue-600 mb-2"></i>
+                        <span class="text-sm font-medium text-gray-700">Search Flights</span>
+                    </a>
+                    <a href="{% url 'my_bookings' %}" class="flex flex-col items-center p-4 rounded-lg border border-gray-200 hover:border-blue-300 hover:shadow-md transition">
+                        <i class="fas fa-ticket-alt text-2xl text-green-600 mb-2"></i>
+                        <span class="text-sm font-medium text-gray-700">My Bookings</span>
+                    </a>
+                    <button onclick="window.print()" class="flex flex-col items-center p-4 rounded-lg border border-gray-200 hover:border-blue-300 hover:shadow-md transition">
+                        <i class="fas fa-print text-2xl text-purple-600 mb-2"></i>
+                        <span class="text-sm font-medium text-gray-700">Print Profile</span>
+                    </button>
+                    <a href="{% url 'logout' %}" class="flex flex-col items-center p-4 rounded-lg border border-gray-200 hover:border-red-300 hover:shadow-md transition">
+                        <i class="fas fa-sign-out-alt text-2xl text-red-600 mb-2"></i>
+                        <span class="text-sm font-medium text-gray-700">Logout</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
